@@ -1,3 +1,5 @@
 tmp
 __pycache__
 .ipynb_checkpoints
+exps/data
+exps/synthetic_data/workspace
