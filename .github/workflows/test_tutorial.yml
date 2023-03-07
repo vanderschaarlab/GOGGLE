@@ -29,6 +29,7 @@ jobs:
             pip install bandit pre-commit
       - name: pre-commit validation
         run: pre-commit run --all
+        args: ["--profile", "black"]
       - name: Security checks
         run: |
             bandit -r src/goggle/*
