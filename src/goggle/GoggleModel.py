@@ -204,6 +204,7 @@ class GoggleModel():
     def evaluate_synthetic(self, X_synth, X_test):
         quality_evaluator = eval_statistical.AlphaPrecision()
         qual_res = quality_evaluator.evaluate(X_test, X_synth)
+        print(qual_res)
         qual_score = np.mean(list(qual_res.values()))
 
         xgb_evaluator = eval_performance.PerformanceEvaluatorXGB()
@@ -213,8 +214,8 @@ class GoggleModel():
         linear_score = linear_evaluator.evaluate(X_test, X_synth)
         mlp_score = mlp_evaluator.evaluate(X_test, X_synth)
         gt_perf = (xgb_score['gt'] + linear_score['gt'] + mlp_score['gt'])/3
-        synth_perf = (xgb_score['syn'] +
-                      linear_score['syn'] + mlp_score['syn'])/3
+        synth_perf = (xgb_score['syn_ood'] +
+                      linear_score['syn_ood'] + mlp_score['syn_ood'])/3
 
         xgb_detector = eval_detection.SyntheticDetectionXGB()
         mlp_detector = eval_detection.SyntheticDetectionMLP()
