@@ -2,7 +2,7 @@ name: Tests Python
 
 on:
   push:
-    branches: [main, release, review]
+    branches: [main, release]
   pull_request:
     types: [opened, synchronize, reopened]
   schedule:
@@ -28,7 +28,7 @@ jobs:
         run: |
             pip install bandit pre-commit
       - name: pre-commit validation
-        run: pre-commit run --all --profile", "black"
+        run: pre-commit run --all --profile "black"
       - name: Security checks
         run: |
             bandit -r src/goggle/*
