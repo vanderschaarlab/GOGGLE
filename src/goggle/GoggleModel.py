@@ -1,15 +1,22 @@
+# Standard imports
 import os
+
+# 3rd party
 import torch
 import numpy as np
 import pandas as pd
 from torch import optim
+
+# Synthcity
 from synthcity.metrics import eval_statistical
 from synthcity.metrics import eval_detection
 from synthcity.metrics import eval_performance
 from synthcity.plugins.core.schema import Schema
-from data_utils import get_dataloader
-from model.Goggle import Goggle
-from model.GoggleLoss import GoggleLoss
+
+# Goggle
+from goggle.data_utils import get_dataloader
+from goggle.model.Goggle import Goggle
+from goggle.model.GoggleLoss import GoggleLoss
 
 
 class GoggleModel():
@@ -204,7 +211,7 @@ class GoggleModel():
     def evaluate_synthetic(self, X_synth, X_test):
         quality_evaluator = eval_statistical.AlphaPrecision()
         qual_res = quality_evaluator.evaluate(X_test, X_synth)
-        print(qual_res)
+        qual_res = {k: v for (k, v) in qual_res.items() if "naive" in k} # use the naive implementation of AlphaPrecision
         qual_score = np.mean(list(qual_res.values()))
 
         xgb_evaluator = eval_performance.PerformanceEvaluatorXGB()

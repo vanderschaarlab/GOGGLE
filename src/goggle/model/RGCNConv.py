@@ -1,5 +1,7 @@
+# Standard imports
 from typing import Optional, Tuple, Union
 
+# 3rd Party
 import torch
 from torch import Tensor
 from torch.nn import Parameter

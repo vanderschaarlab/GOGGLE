@@ -1,9 +1,12 @@
+# 3rd party
 import torch
 from torch import nn
-from .LearnedGraph import LearnedGraph
-from .Encoder import Encoder
-from .GraphDecoder import GraphDecoderHomo, GraphDecoderHet
-from .GraphInputProcessor import GraphInputProcessorHomo, GraphInputProcessorHet
+
+# Goggle
+from goggle.model.LearnedGraph import LearnedGraph
+from goggle.model.Encoder import Encoder
+from goggle.model.GraphDecoder import GraphDecoderHomo, GraphDecoderHet
+from goggle.model.GraphInputProcessor import GraphInputProcessorHomo, GraphInputProcessorHet
 
 
 class Goggle(nn.Module):

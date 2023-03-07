@@ -1,6 +1,9 @@
-from .RGCNConv import RGCNConv
+# 3rd Party
 from torch import nn
 from dgl.nn import SAGEConv, GraphConv
+
+# Goggle
+from goggle.model.RGCNConv import RGCNConv
 
 
 class GraphDecoderHomo(nn.Module):
