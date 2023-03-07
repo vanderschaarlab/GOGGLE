@@ -2,7 +2,7 @@ name: Tests Python
 
 on:
   push:
-    branches: [main, release]
+    branches: [main, release, review]
   pull_request:
     types: [opened, synchronize, reopened]
   schedule:
@@ -17,7 +17,7 @@ jobs:
         python-version: [3.8]
         os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: true
       - name: Set up Python ${{ matrix.python-version }}
@@ -31,7 +31,7 @@ jobs:
         run: pre-commit run --all
       - name: Security checks
         run: |
-            bandit -r src/synthcity/*
+            bandit -r src/goggle/*
   Library:
     needs: [Linter]
     runs-on: ${{ matrix.os }}
@@ -40,7 +40,7 @@ jobs:
         python-version: ['3.7', '3.8', '3.9', '3.10']
         os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: true
       - uses: gautamkrishnar/keepalive-workflow@v1
@@ -59,5 +59,5 @@ jobs:
             pip install torch-scatter torch-sparse -f https://data.pyg.org/whl/torch-1.12.0+cpu.html
             pip install -r requirements.txt
             pip install .[testing]
-      - name: Test with pytest
-        run: pytest -vvvsx -m "not slow" --durations=50
+      - name: Run the tutorials
+        run: python tutorial/nb_test.py --nb_dir tutorial/
