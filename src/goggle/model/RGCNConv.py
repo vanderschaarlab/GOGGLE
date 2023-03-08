@@ -122,7 +122,10 @@ class RGCNConv(MessagePassing):
             self.comp = Parameter(torch.Tensor(num_relations, num_bases))
 
         elif num_blocks is not None:
-            assert in_channels[0] % num_blocks == 0 and out_channels % num_blocks == 0
+            if in_channels[0] % num_blocks != 0 and out_channels % num_blocks != 0:
+                raise AssertionError(
+                    "Channels must be divisible by num_blocks, for RGCNConv."
+                )
             self.weight = Parameter(
                 torch.Tensor(
                     num_relations,
@@ -196,7 +199,8 @@ class RGCNConv(MessagePassing):
 
         if isinstance(edge_index, SparseTensor):
             edge_type = edge_index.storage.value()
-        assert edge_type is not None
+        if edge_type is None:
+            raise AssertionError("edge_type cannot be None for RGCNConv.")
 
         out = torch.zeros(x_r.size(0), self.out_channels, device=x_r.device)
 
