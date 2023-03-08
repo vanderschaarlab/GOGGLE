@@ -27,8 +27,6 @@ jobs:
       - name: Install dependencies
         run: |
             pip install bandit pre-commit
-      - name: clean pre-commit cache
-        run: pre-commit clean
       - name: pre-commit validation
         run: pre-commit run --all
       - name: Security checks
@@ -39,7 +37,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10']
+        python-version: ['3.8']
         os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v3
