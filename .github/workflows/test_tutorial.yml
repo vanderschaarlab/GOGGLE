@@ -2,9 +2,9 @@ name: Tests Python
 
 on:
   push:
-    branches: [main, release]
-  pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [main, release, review]
+  # pull_request:
+  #   types: [opened, synchronize, reopened]
   schedule:
     - cron:  '4 2 * * 3'
 
